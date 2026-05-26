@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب منتج مخصص - Olivia Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .product-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            max-width: 700px;
+            margin: 2rem auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #AD1457;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #F8BBD0;
+            font-family: inherit;
+        }
+        .price-hint {
+            background: #FCE4EC;
+            padding: 10px;
+            border-radius: 12px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        .btn-submit {
+            background: #E91E63;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-flex">
+            <div class="logo"><h1>Olivia <span>Design</span></h1><p>طباعة وتصميم بإحساس</p></div>
+            <nav><ul><li><a href="index.html">الرئيسية</a></li><li><a href="products.html">الخدمات</a></li><li><a href="customize-cards.html">كروت مخصصة</a></li><li><a href="custom-product.html" class="active">طلب منتج آخر</a></li></ul></nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="product-form">
+            <h2>📦 طلب منتج مخصص</h2>
+            <p>اختر نوع المنتج، ثم اكتب المواصفات (مثل اللون، المقاس، الكمية) وأرفق صورة توضيحية (اختياري). سنقوم بتجهيز عرض سعر خلال 24 ساعة.</p>
+            
+            <div class="form-group">
+                <label>نوع المنتج *</label>
+                <select id="product-type">
+                    <option value="استيكر">استيكر مخصص (أشكال، لون، مقاس)</option>
+                    <option value="لوحة">لوحة استقبال أو عروس/عريس</option>
+                    <option value="إطار">فريم أبيض/ذهبي مع طباعة</option>
+                    <option value="إكسسوار">إكسسوارات تصوير (تيجان، بالونات، ...)</option>
+                    <option value="ورق قطني">ورق قطني لمناسبات (تخرج، عرس)</option>
+                    <option value="باقة">باقة جاهزة (عرس/مولود/تخرج)</option>
+                    <option value="أخرى">منتج آخر غير مذكور</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>الوصف التفصيلي (الألوان، المقاس، الكمية، التصميم المطلوب) *</label>
+                <textarea id="description" rows="5" placeholder="مثال: أريد 20 استيكر باللون الوردي، شكل قلب، مقاس 5 سم، مع كتابة اسم 'ليا'"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>رابط الصورة أو التصميم المرجعي (اختياري)</label>
+                <input type="text" id="image-url" placeholder="https://example.com/design.jpg">
+                <small>يمكنك رفع الصورة على موقع مجاني مثل imgbb.com ووضع الرابط هنا</small>
+            </div>
+
+            <div class="form-group">
+                <label>الاسم الكامل *</label>
+                <input type="text" id="fullname">
+            </div>
+            <div class="form-group">
+                <label>رقم الواتساب *</label>
+                <input type="tel" id="phone">
+            </div>
+            <div class="form-group">
+                <label>عنوان التوصيل (اختياري)</label>
+                <input type="text" id="address">
+            </div>
+
+            <div class="price-hint">
+                💡 <strong>ملاحظة:</strong> الأسعار تختلف حسب النوع والكمية. سنرسل لك عرض سعر مؤكد قبل البدء في التنفيذ.
+            </div>
+
+            <button id="send-wa" class="btn-submit" style="background:#25D366; margin-bottom:10px;">📱 إرسال الطلب عبر واتساب</button>
+            <button id="send-email" class="btn-submit">✉️ إرسال الطلب عبر الإيميل</button>
+        </div>
+    </main>
+
+    <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
+
+    <script>
+        document.getElementById('send-wa').addEventListener('click', function() {
+            const type = document.getElementById('product-type').value;
+            const desc = document.getElementById('description').value;
+            const img = document.getElementById('image-url').value;
+            const name = document.getElementById('fullname').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!name || !phone || !desc) { alert('الاسم، رقم الواتساب، والوصف مطلوبة'); return; }
+            const address = document.getElementById('address').value;
+            let msg = `طلب منتج جديد من ${name}\nالنوع: ${type}\nالوصف: ${desc}\nالمرجع: ${img}\nالعنوان: ${address}\nواتساب: ${phone}`;
+            window.open(`https://wa.me/${phone.replace(/^0/, '218')}?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+
+        document.getElementById('send-email').addEventListener('click', async function() {
+            const type = document.getElementById('product-type').value;
+            const desc = document.getElementById('description').value;
+            const img = document.getElementById('image-url').value;
+            const name = document.getElementById('fullname').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!name || !phone || !desc) { alert('يرجى ملء جميع الحقول المطلوبة'); return; }
+            const address = document.getElementById('address').value;
+            const message = `طلب منتج:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nالنوع: ${type}\nالوصف: ${desc}\nصورة: ${img}`;
+            const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+            try {
+                const res = await fetch(formspreeUrl, {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ name, phone, message, _subject: `طلب منتج: ${type}` })
+                });
+                if(res.ok) alert('تم إرسال الطلب! سنتواصل معك قريباً.');
+                else alert('حدث خطأ، حاول مرة أخرى أو عبر واتساب');
+            } catch(e) { alert('خطأ في الإرسال'); }
+        });
+    </script>
+</body>
+</html>
