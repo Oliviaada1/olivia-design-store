@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Cairo', sans-serif;
-    background-color: #fefaf5;
-    color: #2d2b26;
+    background-color: #FFF0F5; /* وردي فاتح جداً */
+    color: #4A2A3A;
     line-height: 1.6;
 }
 
@@ -19,12 +19,13 @@ body {
 
 /* header */
 header {
-    background: white;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.03);
+    background: linear-gradient(135deg, #E91E63, #F06292);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
+    color: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 }
 .header-flex {
     display: flex;
@@ -35,13 +36,14 @@ header {
 .logo h1 {
     font-size: 1.8rem;
     font-weight: 700;
+    color: white;
 }
 .logo span {
-    color: #e8a598;
+    color: #FFD700;
 }
 .logo p {
     font-size: 0.8rem;
-    color: #b89a7a;
+    color: #FFE0E7;
 }
 nav ul {
     display: flex;
@@ -50,29 +52,29 @@ nav ul {
 }
 nav a {
     text-decoration: none;
-    color: #4a3f35;
+    color: white;
     font-weight: 600;
     transition: 0.2s;
 }
 nav a:hover, nav a.active {
-    color: #e8a598;
-    border-bottom: 2px solid #e8a598;
+    color: #FFD700;
+    border-bottom: 2px solid #FFD700;
     padding-bottom: 4px;
 }
 
 /* hero */
 .hero {
-    background: linear-gradient(135deg, #f8ede4 0%, #fff6f0 100%);
+    background: linear-gradient(135deg, #FCE4EC, #F8BBD0);
     padding: 4rem 0;
     text-align: center;
+    color: #880E4F;
 }
 .hero h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #5a3e2e;
 }
 .btn-primary {
-    background: #e8a598;
+    background: #E91E63;
     color: white;
     border: none;
     padding: 12px 30px;
@@ -82,9 +84,11 @@ nav a:hover, nav a.active {
     margin-top: 1rem;
     text-decoration: none;
     transition: 0.2s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 .btn-primary:hover {
-    background: #d48d7a;
+    background: #AD1457;
+    transform: scale(1.02);
 }
 
 /* cards */
@@ -99,67 +103,74 @@ nav a:hover, nav a.active {
     background: white;
     padding: 1.5rem;
     border-radius: 24px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     text-align: center;
-    width: 220px;
+    width: 240px;
     transition: 0.2s;
+    border: 1px solid #F8BBD0;
 }
 .card i {
     font-size: 2.5rem;
-    color: #e8a598;
+    color: #E91E63;
     margin-bottom: 1rem;
 }
 .price {
     display: block;
-    background: #f3ede8;
+    background: #FCE4EC;
     margin: 1rem 0;
     padding: 6px;
     border-radius: 40px;
     font-weight: bold;
-    color: #b67b5e;
+    color: #AD1457;
+    font-size: 1.2rem;
 }
 .btn-small {
-    background: #d4af37;
-    color: #2d2b26;
+    background: #E91E63;
+    color: white;
     padding: 6px 16px;
     border-radius: 40px;
     text-decoration: none;
     font-size: 0.8rem;
+    display: inline-block;
+}
+.btn-small:hover {
+    background: #AD1457;
 }
 
 /* products page */
 .page-title {
     margin: 2rem 0 1rem;
+    color: #AD1457;
 }
 .services-section {
     background: white;
     border-radius: 24px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 .price-list .item {
     display: flex;
     justify-content: space-between;
     padding: 0.8rem 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #F8BBD0;
 }
 .note {
-    background: #fff1e0;
+    background: #FFF3F5;
     padding: 1rem;
     border-radius: 20px;
     margin: 2rem 0;
+    border-right: 4px solid #E91E63;
 }
-
 footer {
-    background: #f0e7df;
+    background: #880E4F;
     text-align: center;
     padding: 2rem 0;
     margin-top: 3rem;
-    color: #5c4b3a;
+    color: #FFE0E7;
 }
 footer a {
-    color: #b27d60;
+    color: #FFD700;
     text-decoration: none;
 }
 
