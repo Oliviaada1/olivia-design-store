@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        /* إضافات خاصة بصفحة التخصيص */
+        /* تنسيقات إضافية خاصة بالتخصيص */
         .customizer-container {
             display: flex;
             flex-wrap: wrap;
@@ -19,7 +19,7 @@
         }
         .controls {
             flex: 1;
-            background: #fff9f5;
+            background: #FFF0F5;
             padding: 1.5rem;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -27,7 +27,7 @@
         .preview-area {
             flex: 1;
             text-align: center;
-            background: #f5efe9;
+            background: #FCE4EC;
             padding: 1.5rem;
             border-radius: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -50,11 +50,12 @@
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: #AD1457;
         }
         input, select, textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid #e2d9d2;
+            border: 1px solid #F8BBD0;
             border-radius: 12px;
             font-family: inherit;
             background: white;
@@ -69,31 +70,49 @@
             border: 2px solid transparent;
         }
         .color-option.selected {
-            border-color: #333;
+            border-color: #E91E63;
             transform: scale(1.05);
         }
-        .btn-pdf {
-            background: #d4af37;
-            color: #2d2b26;
+        .btn-pdf, .btn-whatsapp, .btn-order {
+            background: #E91E63;
+            color: white;
             border: none;
             padding: 12px 24px;
             border-radius: 40px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            margin-top: 10px;
+            transition: 0.2s;
         }
-        .btn-pdf:hover {
-            background: #c2a131;
+        .btn-pdf:hover, .btn-whatsapp:hover, .btn-order:hover {
+            background: #AD1457;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+        }
+        .btn-whatsapp:hover {
+            background: #128C7E;
         }
         .note-pdf {
             font-size: 0.8rem;
             margin-top: 10px;
-            color: #7a6a5c;
+            color: #AD1457;
         }
-        .frame-preview {
-            border: 2px solid #ccc;
-            padding: 10px;
+        .price-badge {
+            background: #FFD700;
+            color: #880E4F;
+            padding: 8px;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .order-form {
+            margin-top: 20px;
+            background: white;
+            padding: 15px;
             border-radius: 16px;
         }
     </style>
@@ -107,11 +126,10 @@
     </header>
 
     <main class="container">
-        <h2>🎨 صمم بطاقتك التحفيزية</h2>
-        <p>اختر اللون، اكتب رسالتك، وأضف إطارك المفضل. بعد الانتهاء، احفظها كـ PDF وأرسلها لنا للطباعة.</p>
+        <h2>🎨 صمم بطاقتك التحفيزية (وجهين)</h2>
+        <p>اختر اللون، اكتب رسالتك، وأضف إطارك المفضل. <strong>السعر: 12 كارت بـ 6 دينار ليبي (طباعة وجهين)</strong> - يمكنك اختيار الكمية أدناه.</p>
 
         <div class="customizer-container">
-            <!-- لوحة التحكم -->
             <div class="controls">
                 <div class="control-group">
                     <label>✏️ النص الرئيسي (العربي أو الإنجليزي)</label>
@@ -122,12 +140,12 @@ Stay strong; this generation needs both your firmness and your kindness.</textar
                 <div class="control-group">
                     <label>🎨 لون الخلفية</label>
                     <div id="color-palette">
-                        <div class="color-option" style="background:#fdf0e0;" data-color="#fdf0e0"></div>
-                        <div class="color-option" style="background:#ffe0f0;" data-color="#ffe0f0"></div>
-                        <div class="color-option" style="background:#e6f0fa;" data-color="#e6f0fa"></div>
-                        <div class="color-option" style="background:#fff2cc;" data-color="#fff2cc"></div>
-                        <div class="color-option" style="background:#f0e6d8;" data-color="#f0e6d8"></div>
-                        <div class="color-option" style="background:#ffffff;" data-color="#ffffff"></div>
+                        <div class="color-option" style="background:#FFE4E1;" data-color="#FFE4E1"></div>
+                        <div class="color-option" style="background:#FFB6C1;" data-color="#FFB6C1"></div>
+                        <div class="color-option" style="background:#FADADD;" data-color="#FADADD"></div>
+                        <div class="color-option" style="background:#FFF0F5;" data-color="#FFF0F5"></div>
+                        <div class="color-option" style="background:#FCE4EC;" data-color="#FCE4EC"></div>
+                        <div class="color-option" style="background:#FFFFFF;" data-color="#FFFFFF"></div>
                     </div>
                 </div>
 
@@ -135,30 +153,41 @@ Stay strong; this generation needs both your firmness and your kindness.</textar
                     <label>🖼️ اختيار الإطار</label>
                     <select id="frame-style">
                         <option value="none">بدون إطار</option>
-                        <option value="simple">إطار بسيط (رمادي)</option>
+                        <option value="simple">إطار وردي خفيف</option>
                         <option value="gold">إطار ذهبي</option>
-                        <option value="white">إطار أبيض عريض</option>
+                        <option value="pink">إطار وردي غامق</option>
                     </select>
                 </div>
 
                 <div class="control-group">
                     <label>🖌️ لون النص</label>
-                    <input type="color" id="text-color" value="#2c3e2f">
+                    <input type="color" id="text-color" value="#880E4F">
                 </div>
 
                 <div class="control-group">
-                    <label>🖼️ إضافة صورة (اختياري) - سيتم وضعها أسفل النص</label>
+                    <label>🖼️ إضافة صورة (اختياري) - ستوضع أسفل النص</label>
                     <input type="file" id="upload-image" accept="image/*">
                 </div>
 
-                <button id="download-pdf" class="btn-pdf">📄 تحميل كـ PDF وحفظ التصميم</button>
-                <p class="note-pdf">سيتم تحميل ملف PDF جاهز للطباعة، يمكنك إرساله إلينا عبر الإنستغرام لطباعته وتسليمه.</p>
-                <p class="note-pdf">سعر البطاقة الواحدة: <strong>6 د.ل</strong> (الطباعة على ورق مقوى، وجه واحد).</p>
+                <div class="control-group">
+                    <label>📦 الكمية (كل 12 كارت = 6 د.ل)</label>
+                    <select id="quantity">
+                        <option value="12">12 كارت - 6 د.ل</option>
+                        <option value="24">24 كارت - 12 د.ل</option>
+                        <option value="36">36 كارت - 18 د.ل</option>
+                        <option value="48">48 كارت - 24 د.ل</option>
+                    </select>
+                </div>
+
+                <button id="download-pdf" class="btn-pdf">📄 تحميل PDF للطباعة</button>
+                <button id="order-whatsapp" class="btn-whatsapp">📱 إرسال الطلب عبر واتساب</button>
+                <button id="order-email" class="btn-order">✉️ إرسال الطلب بالإيميل (نموذج)</button>
+                <div class="price-badge" id="price-display">السعر الإجمالي: 6 د.ل (12 كارت)</div>
+                <p class="note-pdf">🔹 بعد تحميل PDF، يمكنك إرساله إلينا عبر واتساب أو نموذج الإيميل.<br>🔹 الطباعة على وجهي الكارت بجودة عالية.</p>
             </div>
 
-            <!-- منطقة المعاينة -->
             <div class="preview-area">
-                <h3>معاينة حية</h3>
+                <h3>معاينة حية (الوجه الأمامي)</h3>
                 <div id="card-preview">
                     <div id="preview-inner" style="padding: 16px; transition: all 0.2s;">
                         <p id="preview-text" style="white-space: pre-line; font-size: 18px; margin:0;">خليك قوي، الجيل هذا محتاج لصابتك وحنيك مع بعض.
@@ -166,7 +195,21 @@ Stay strong; this generation needs both your firmness and your kindness.</p>
                         <div id="preview-image-container" style="margin-top:15px;"></div>
                     </div>
                 </div>
-                <p style="margin-top: 20px;">⬅️ غيّر الإعدادات على اليسار، المعاينة تتغير مباشرة.</p>
+                <p style="margin-top: 20px; font-size:0.8rem;">الوجه الخلفي: مكتوب عليه "by happy" بحجم صغير (ثابت).</p>
+            </div>
+        </div>
+
+        <!-- نموذج إرسال الإيميل (يظهر عند الضغط على زر الإيميل) -->
+        <div id="email-form-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:1000;">
+            <div style="background:white; padding:2rem; border-radius:24px; max-width:500px; width:90%; text-align:right;">
+                <h3>إرسال الطلب بالإيميل</h3>
+                <form id="order-form">
+                    <div class="control-group"><label>الاسم الكامل</label><input type="text" id="customer-name" required></div>
+                    <div class="control-group"><label>رقم الهاتف (واتساب)</label><input type="tel" id="customer-phone" required></div>
+                    <div class="control-group"><label>البريد الإلكتروني (اختياري)</label><input type="email" id="customer-email"></div>
+                    <button type="submit" class="btn-pdf">إرسال الطلب</button>
+                    <button type="button" id="close-modal" class="btn-small" style="background:gray;">إلغاء</button>
+                </form>
             </div>
         </div>
     </main>
@@ -174,7 +217,7 @@ Stay strong; this generation needs both your firmness and your kindness.</p>
     <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
 
     <script>
-        // عناصر DOM
+        // ---------- عناصر الصفحة ----------
         const textarea = document.getElementById('card-text');
         const previewText = document.getElementById('preview-text');
         const colorOptions = document.querySelectorAll('.color-option');
@@ -184,40 +227,45 @@ Stay strong; this generation needs both your firmness and your kindness.</p>
         const previewInner = document.getElementById('preview-inner');
         const uploadImage = document.getElementById('upload-image');
         const previewImageContainer = document.getElementById('preview-image-container');
-
+        const quantitySelect = document.getElementById('quantity');
+        const priceDisplay = document.getElementById('price-display');
         let currentImageData = null;
 
-        // تحديث النص
-        function updateText() {
-            previewText.innerText = textarea.value;
+        // تحديث السعر حسب الكمية
+        function updatePrice() {
+            let qty = parseInt(quantitySelect.value);
+            let price = (qty / 12) * 6;
+            priceDisplay.innerText = `السعر الإجمالي: ${price} د.ل (${qty} كارت)`;
         }
-        textarea.addEventListener('input', updateText);
+        quantitySelect.addEventListener('change', updatePrice);
+        updatePrice();
 
-        // تحديث لون الخلفية
+        // تحديث النص
+        function updateText() { previewText.innerText = textarea.value; }
+        textarea.addEventListener('input', updateText);
+        updateText();
+
+        // لون الخلفية
         colorOptions.forEach(opt => {
             opt.addEventListener('click', function() {
-                const color = this.getAttribute('data-color');
-                previewInner.style.backgroundColor = color;
+                previewInner.style.backgroundColor = this.getAttribute('data-color');
                 colorOptions.forEach(o => o.classList.remove('selected'));
                 this.classList.add('selected');
             });
         });
-        // تحديد اللون الأول كافتراضي
         if(colorOptions.length) colorOptions[0].click();
 
-        // تحديث الإطار
+        // الإطار
         function updateFrame() {
             const frame = frameSelect.value;
             previewDiv.style.border = 'none';
-            previewDiv.style.outline = 'none';
             previewDiv.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
             if(frame === 'simple') {
-                previewDiv.style.border = '2px solid #9e8d7a';
+                previewDiv.style.border = '3px solid #F48FB1';
             } else if(frame === 'gold') {
-                previewDiv.style.border = '4px solid #d4af37';
-            } else if(frame === 'white') {
-                previewDiv.style.border = '8px solid white';
-                previewDiv.style.boxShadow = '0 0 0 2px #ddd';
+                previewDiv.style.border = '4px solid #FFD700';
+            } else if(frame === 'pink') {
+                previewDiv.style.border = '5px solid #E91E63';
             } else {
                 previewDiv.style.border = 'none';
             }
@@ -225,14 +273,12 @@ Stay strong; this generation needs both your firmness and your kindness.</p>
         frameSelect.addEventListener('change', updateFrame);
         updateFrame();
 
-        // تحديث لون النص
-        function updateTextColor() {
-            previewText.style.color = textColorInput.value;
-        }
+        // لون النص
+        function updateTextColor() { previewText.style.color = textColorInput.value; }
         textColorInput.addEventListener('input', updateTextColor);
         updateTextColor();
 
-        // رفع الصورة وعرضها في المعاينة
+        // رفع الصورة
         uploadImage.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if(file) {
@@ -248,38 +294,79 @@ Stay strong; this generation needs both your firmness and your kindness.</p>
             }
         });
 
-        // تحميل PDF باستخدام html2canvas + jsPDF
+        // تحميل PDF
         document.getElementById('download-pdf').addEventListener('click', async function() {
             const element = document.getElementById('card-preview');
-            // مؤقت لإظهار رسالة
             const btn = this;
-            const originalText = btn.innerText;
             btn.innerText = 'جاري تجهيز PDF...';
             btn.disabled = true;
             try {
-                const canvas = await html2canvas(element, {
-                    scale: 3, // دقة عالية للطباعة
-                    backgroundColor: previewInner.style.backgroundColor || '#ffffff',
-                    logging: false
-                });
+                const canvas = await html2canvas(element, { scale: 3, backgroundColor: previewInner.style.backgroundColor || '#ffffff' });
                 const imgData = canvas.toDataURL('image/png');
                 const { jsPDF } = window.jspdf;
-                // نختار حجم A4 أفقي أو عمودي حسب شكل البطاقة (هنا عمودي)
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const imgProps = pdf.getImageProperties(imgData);
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save('olivia_card.pdf');
-            } catch(err) {
-                alert('حدث خطأ: '+err.message);
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
+            } catch(err) { alert('خطأ: '+err.message); }
+            finally { btn.innerText = '📄 تحميل PDF للطباعة'; btn.disabled = false; }
         });
 
-        updateText();
+        // إرسال عبر واتساب
+        document.getElementById('order-whatsapp').addEventListener('click', function() {
+            let qty = quantitySelect.value;
+            let price = (qty/12)*6;
+            let text = `مرحباً أوليفيا، أريد طلب كروت تحفيز مخصصة:
+- الكمية: ${qty} كارت (السعر ${price} د.ل)
+- النص: ${textarea.value}
+- لون الخلفية: ${previewInner.style.backgroundColor}
+- الإطار: ${frameSelect.options[frameSelect.selectedIndex].text}
+- لون النص: ${textColorInput.value}
+${currentImageData ? 'تم إضافة صورة' : 'بدون صورة'}
+الرجاء تأكيد الطلب. شكراً!`;
+            let encoded = encodeURIComponent(text);
+            window.open(`https://wa.me/218912345678?text=${encoded}`, '_blank'); // غير الرقم إلى رقم هاتفك
+        });
+
+        // نموذج الإيميل (باستخدام Formspree)
+        const modal = document.getElementById('email-form-modal');
+        const orderEmailBtn = document.getElementById('order-email');
+        const closeModal = document.getElementById('close-modal');
+        orderEmailBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
+        closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
+        document.getElementById('order-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            let name = document.getElementById('customer-name').value;
+            let phone = document.getElementById('customer-phone').value;
+            let email = document.getElementById('customer-email').value || 'غير موجود';
+            let qty = quantitySelect.value;
+            let price = (qty/12)*6;
+            let message = `طلب جديد من الموقع:
+الاسم: ${name}
+الهاتف: ${phone}
+البريد: ${email}
+الكمية: ${qty} كارت (السعر ${price} د.ل)
+النص: ${textarea.value}
+لون الخلفية: ${previewInner.style.backgroundColor}
+الإطار: ${frameSelect.options[frameSelect.selectedIndex].text}
+لون النص: ${textColorInput.value}
+${currentImageData ? 'الصورة: [تم رفع صورة لكن لا يمكن إرفاقها تلقائياً، يرجى طلبها من العميل]' : 'بدون صورة'}`;
+            // استخدام Formspree (استبدل YOUR_FORM_ID بمعرف النموذج الخاص بك بعد إنشائه)
+            const formspreeUrl = 'https://formspree.io/f/YOUR_FORM_ID'; // سيتم إعطاؤك رابطاً بعد التسجيل
+            try {
+                const response = await fetch(formspreeUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, message, _subject: 'طلب جديد من Olivia Design' })
+                });
+                if(response.ok) {
+                    alert('تم إرسال طلبك بنجاح! سأتصل بك قريباً.');
+                    modal.style.display = 'none';
+                } else { alert('حدث خطأ، حاول مرة أخرى أو تواصل عبر واتساب'); }
+            } catch(err) { alert('خطأ في الاتصال: '+err.message); }
+        });
     </script>
 </body>
 </html>
