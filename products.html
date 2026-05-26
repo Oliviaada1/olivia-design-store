@@ -21,45 +21,68 @@
         
         <div class="services-section">
             <h3>🖨️ خدمات الطباعة والمنتجات</h3>
-            <div class="price-list">
-                <div class="item"><span>استيكر</span><span>5 د.ل</span></div>
-                <div class="item"><span>وجه واحد (طباعة)</span><span>2 د.ل</span></div>
-                <div class="item"><span>فريم أبيض (20×15 سم)</span><span>14 د.ل</span></div>
-                <div class="item"><span>كروت التحفيز</span><span>6 د.ل</span></div>
-                <div class="item"><span>تعليف حراري</span><span>1.50 د.ل</span></div>
-                <div class="item"><span>إكسسوارات</span><span>2 د.ل</span></div>
-            </div>
+            <div id="products-list" class="price-list"></div>
         </div>
 
         <div class="services-section">
             <h3>📱 خدمات السوشيال ميديا</h3>
-            <div class="price-list">
-                <div class="item"><span>فيلتر جاهز</span><span>10 د.ل</span></div>
-                <div class="item"><span>دعوة 2D ثابتة</span><span>20 د.ل</span></div>
-                <div class="item"><span>دعوة فيديو</span><span>40 د.ل</span></div>
-                <div class="item"><span>دعوة 3D احترافية</span><span>100 د.ل</span></div>
-                <div class="item"><span>تصميم متوسط</span><span>15 د.ل</span></div>
-                <div class="item"><span>تصميم قوي</span><span>20 د.ل</span></div>
-                <div class="item"><span>لوحة استقبال</span><span>30 د.ل</span></div>
-                <div class="item"><span>لوحة عروس</span><span>80 د.ل</span></div>
-                <div class="item"><span>لوحة عريس</span><span>50 د.ل</span></div>
-            </div>
+            <div id="social-list" class="price-list"></div>
         </div>
 
         <div class="services-section">
-            <h3>🎁 باقات شاملة</h3>
-            <div class="price-list">
-                <div class="item"><span>باقة عرس (شاملة)</span><span>يحدد حسب الطلب</span></div>
-                <div class="item"><span>باقة مولود (شاملة)</span><span>يحدد حسب الطلب</span></div>
-            </div>
+            <h3>🎁 باقات شاملة (أسعار خاصة)</h3>
+            <div id="bundles-list" class="price-list"></div>
         </div>
 
         <div class="note">
-            <p><i class="fas fa-info-circle"></i> ملاحظة: الأسعار بالدينار الليبي، قابلة للتغيير حسب التفاصيل. للطلب المخصص تواصل معنا عبر الإنستغرام.</p>
+            <p><i class="fas fa-info-circle"></i> ملاحظة: الأسعار بالدينار الليبي، قابلة للتغيير حسب التفاصيل. للطلب المخصص تواصل معنا عبر الإنستغرام أو واتساب.</p>
         </div>
     </main>
 
     <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
-    <script src="main.js"></script>
+
+    <script>
+        // قائمة المنتجات - يمكنك إضافة أو تعديل أي منتج بسهولة هنا
+        const products = [
+            { name: "استيكر (مقاسات متنوعة)", price: "5 د.ل" },
+            { name: "طباعة وجهين (لكل وجه)", price: "2 د.ل" },
+            { name: "فريم أبيض 20×15 سم", price: "14 د.ل" },
+            { name: "كروت التحفيز (12 كارت)", price: "6 د.ل" },
+            { name: "تعليف حراري", price: "1.50 د.ل" },
+            { name: "إكسسوارات تصوير", price: "2 د.ل" }
+        ];
+
+        const social = [
+            { name: "فيلتر جاهز (سناب/انستا)", price: "10 د.ل" },
+            { name: "دعوة 2D ثابتة", price: "20 د.ل" },
+            { name: "دعوة فيديو قصير", price: "40 د.ل" },
+            { name: "دعوة 3D احترافية", price: "100 د.ل" },
+            { name: "تصميم متوسط (بوست)", price: "15 د.ل" },
+            { name: "تصميم قوي (متكامل)", price: "20 د.ل" },
+            { name: "لوحة استقبال", price: "30 د.ل" },
+            { name: "لوحة عروس", price: "80 د.ل" },
+            { name: "لوحة عريس", price: "50 د.ل" }
+        ];
+
+        const bundles = [
+            { name: "🎂 باقة عرس (شاملة): تصميم ثيم عرس + 10 طباعة وجهين + فلتر سناب شات", price: "50 د.ل" },
+            { name: "🍼 باقة مولود (شاملة): تصميم ثيم مولود + 5 طباعة استيكر + فلتر سناب شات", price: "45 د.ل" }
+        ];
+
+        function renderList(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `<span>${item.name}</span><span><strong>${item.price}</strong></span>`;
+                container.appendChild(div);
+            });
+        }
+
+        renderList('products-list', products);
+        renderList('social-list', social);
+        renderList('bundles-list', bundles);
+    </script>
 </body>
 </html>
