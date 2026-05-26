@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صمم بطاقتك التحفيزية - Olivia Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* إضافات خاصة بصفحة التخصيص */
+        .customizer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .controls {
+            flex: 1;
+            background: #fff9f5;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .preview-area {
+            flex: 1;
+            text-align: center;
+            background: #f5efe9;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        #card-preview {
+            background: white;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.2s;
+        }
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2d9d2;
+            border-radius: 12px;
+            font-family: inherit;
+            background: white;
+        }
+        .color-option {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.05);
+        }
+        .btn-pdf {
+            background: #d4af37;
+            color: #2d2b26;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        .btn-pdf:hover {
+            background: #c2a131;
+        }
+        .note-pdf {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #7a6a5c;
+        }
+        .frame-preview {
+            border: 2px solid #ccc;
+            padding: 10px;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-flex">
+            <div class="logo"><h1>Olivia <span>Design</span></h1><p>طباعة وتصميم بإحساس</p></div>
+            <nav><ul><li><a href="index.html">الرئيسية</a></li><li><a href="products.html">الخدمات</a></li><li><a href="customize.html" class="active">اصنع بطاقتك</a></li></ul></nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>🎨 صمم بطاقتك التحفيزية</h2>
+        <p>اختر اللون، اكتب رسالتك، وأضف إطارك المفضل. بعد الانتهاء، احفظها كـ PDF وأرسلها لنا للطباعة.</p>
+
+        <div class="customizer-container">
+            <!-- لوحة التحكم -->
+            <div class="controls">
+                <div class="control-group">
+                    <label>✏️ النص الرئيسي (العربي أو الإنجليزي)</label>
+                    <textarea id="card-text" rows="4">خليك قوي، الجيل هذا محتاج لصابتك وحنيك مع بعض.
+Stay strong; this generation needs both your firmness and your kindness.</textarea>
+                </div>
+
+                <div class="control-group">
+                    <label>🎨 لون الخلفية</label>
+                    <div id="color-palette">
+                        <div class="color-option" style="background:#fdf0e0;" data-color="#fdf0e0"></div>
+                        <div class="color-option" style="background:#ffe0f0;" data-color="#ffe0f0"></div>
+                        <div class="color-option" style="background:#e6f0fa;" data-color="#e6f0fa"></div>
+                        <div class="color-option" style="background:#fff2cc;" data-color="#fff2cc"></div>
+                        <div class="color-option" style="background:#f0e6d8;" data-color="#f0e6d8"></div>
+                        <div class="color-option" style="background:#ffffff;" data-color="#ffffff"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>🖼️ اختيار الإطار</label>
+                    <select id="frame-style">
+                        <option value="none">بدون إطار</option>
+                        <option value="simple">إطار بسيط (رمادي)</option>
+                        <option value="gold">إطار ذهبي</option>
+                        <option value="white">إطار أبيض عريض</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>🖌️ لون النص</label>
+                    <input type="color" id="text-color" value="#2c3e2f">
+                </div>
+
+                <div class="control-group">
+                    <label>🖼️ إضافة صورة (اختياري) - سيتم وضعها أسفل النص</label>
+                    <input type="file" id="upload-image" accept="image/*">
+                </div>
+
+                <button id="download-pdf" class="btn-pdf">📄 تحميل كـ PDF وحفظ التصميم</button>
+                <p class="note-pdf">سيتم تحميل ملف PDF جاهز للطباعة، يمكنك إرساله إلينا عبر الإنستغرام لطباعته وتسليمه.</p>
+                <p class="note-pdf">سعر البطاقة الواحدة: <strong>6 د.ل</strong> (الطباعة على ورق مقوى، وجه واحد).</p>
+            </div>
+
+            <!-- منطقة المعاينة -->
+            <div class="preview-area">
+                <h3>معاينة حية</h3>
+                <div id="card-preview">
+                    <div id="preview-inner" style="padding: 16px; transition: all 0.2s;">
+                        <p id="preview-text" style="white-space: pre-line; font-size: 18px; margin:0;">خليك قوي، الجيل هذا محتاج لصابتك وحنيك مع بعض.
+Stay strong; this generation needs both your firmness and your kindness.</p>
+                        <div id="preview-image-container" style="margin-top:15px;"></div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px;">⬅️ غيّر الإعدادات على اليسار، المعاينة تتغير مباشرة.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
+
+    <script>
+        // عناصر DOM
+        const textarea = document.getElementById('card-text');
+        const previewText = document.getElementById('preview-text');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const frameSelect = document.getElementById('frame-style');
+        const textColorInput = document.getElementById('text-color');
+        const previewDiv = document.getElementById('card-preview');
+        const previewInner = document.getElementById('preview-inner');
+        const uploadImage = document.getElementById('upload-image');
+        const previewImageContainer = document.getElementById('preview-image-container');
+
+        let currentImageData = null;
+
+        // تحديث النص
+        function updateText() {
+            previewText.innerText = textarea.value;
+        }
+        textarea.addEventListener('input', updateText);
+
+        // تحديث لون الخلفية
+        colorOptions.forEach(opt => {
+            opt.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                previewInner.style.backgroundColor = color;
+                colorOptions.forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        // تحديد اللون الأول كافتراضي
+        if(colorOptions.length) colorOptions[0].click();
+
+        // تحديث الإطار
+        function updateFrame() {
+            const frame = frameSelect.value;
+            previewDiv.style.border = 'none';
+            previewDiv.style.outline = 'none';
+            previewDiv.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+            if(frame === 'simple') {
+                previewDiv.style.border = '2px solid #9e8d7a';
+            } else if(frame === 'gold') {
+                previewDiv.style.border = '4px solid #d4af37';
+            } else if(frame === 'white') {
+                previewDiv.style.border = '8px solid white';
+                previewDiv.style.boxShadow = '0 0 0 2px #ddd';
+            } else {
+                previewDiv.style.border = 'none';
+            }
+        }
+        frameSelect.addEventListener('change', updateFrame);
+        updateFrame();
+
+        // تحديث لون النص
+        function updateTextColor() {
+            previewText.style.color = textColorInput.value;
+        }
+        textColorInput.addEventListener('input', updateTextColor);
+        updateTextColor();
+
+        // رفع الصورة وعرضها في المعاينة
+        uploadImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    currentImageData = event.target.result;
+                    previewImageContainer.innerHTML = `<img src="${currentImageData}" style="max-width:100%; max-height:150px; border-radius:12px;">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                currentImageData = null;
+                previewImageContainer.innerHTML = '';
+            }
+        });
+
+        // تحميل PDF باستخدام html2canvas + jsPDF
+        document.getElementById('download-pdf').addEventListener('click', async function() {
+            const element = document.getElementById('card-preview');
+            // مؤقت لإظهار رسالة
+            const btn = this;
+            const originalText = btn.innerText;
+            btn.innerText = 'جاري تجهيز PDF...';
+            btn.disabled = true;
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 3, // دقة عالية للطباعة
+                    backgroundColor: previewInner.style.backgroundColor || '#ffffff',
+                    logging: false
+                });
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                // نختار حجم A4 أفقي أو عمودي حسب شكل البطاقة (هنا عمودي)
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('olivia_card.pdf');
+            } catch(err) {
+                alert('حدث خطأ: '+err.message);
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        updateText();
+    </script>
+</body>
+</html>
