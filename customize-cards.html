@@ -214,35 +214,34 @@
             return {r,g,b};
         }
 
-        // واتساب
-        document.getElementById('order-wa').addEventListener('click', function() {
-            const name = document.getElementById('fullname').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            if (!name || !phone) { alert('الاسم ورقم الواتساب مطلوبان'); return; }
-            const address = document.getElementById('address').value;
-            const cards = getAllCardsData();
-            let details = cards.map((c,i)=>`${i+1}: ${c.text.substring(0,40)}...`).join('\n');
-            let msg = `طلب كروت تحفيزية (${currentCount} كارت)\nالاسم: ${name}\nواتساب: ${phone}\nالعنوان: ${address}\n\nالتفاصيل:\n${details}\n\nالرجاء انتظار ملف PDF من العميل.`;
-            window.open(`https://wa.me/${phone.replace(/^0/, '218')}?text=${encodeURIComponent(msg)}`, '_blank');
-        });
+        
 
-        // إيميل (Formspree)
-        document.getElementById('order-email').addEventListener('click', async function() {
-            const name = document.getElementById('fullname').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            if (!name || !phone) { alert('الاسم ورقم الهاتف مطلوبان'); return; }
-            const address = document.getElementById('address').value;
-            const cards = getAllCardsData();
-            let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n اللون: ${c.color}`).join('\n\n');
-            const message = `طلب جديد:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${fullDetails}`;
-            // استبدل YOUR_FORMSPREE_ID بالرابط الحقيقي
-            const url = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
-            try {
-                const res = await fetch(url, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, phone, message, _subject: 'طلب كروت تحفيزية' }) });
-                if(res.ok) alert('تم إرسال الطلب بنجاح! سنتواصل معك.');
-                else alert('خطأ، حاول مرة أخرى.');
-            } catch(e) { alert('خطأ في الإرسال'); }
+ // إيميل
+document.getElementById('order-email').addEventListener('click', async function() {
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone) { alert('الاسم ورقم الهاتف مطلوبان'); return; }
+    const address = document.getElementById('address').value;
+    const cards = getAllCardsData();
+    let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n اللون: ${c.color}`).join('\n\n');
+    const message = `طلب جديد (كروت تحفيزية):\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${fullDetails}`;
+    const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    try {
+        const res = await fetch(formspreeUrl, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ name, phone, message, _subject: 'طلب كروت تحفيزية' })
         });
+        if(res.ok) alert('تم إرسال الطلب بنجاح! سنتواصل معك عبر البريد أو الإنستغرام.');
+        else alert('حدث خطأ، حاول مرة أخرى أو راسلنا على الإنستغرام مباشرة.');
+    } catch(e) { alert('خطأ في الإرسال: '+e.message); }
+});
+
+// زر الإنستغرام
+document.getElementById('order-ig').addEventListener('click', function() {
+    window.open('https://www.instagram.com/_olivia.design_/', '_blank');
+    alert('افتح المحادثة المباشرة معنا على الإنستغرام وأرسل لنا ملف PDF الذي قمت بتحميله.');
+});
     </script>
 </body>
 </html>
