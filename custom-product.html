@@ -135,7 +135,7 @@
     if (!name || !phone || !desc) { alert('يرجى ملء جميع الحقول المطلوبة'); return; }
     const address = document.getElementById('address').value;
     const message = `طلب منتج جديد:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nالنوع: ${type}\nالوصف: ${desc}\nصورة مرجعية: ${img}`;
-    const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    const formspreeUrl = 'https://formspree.io/f/mzdwkqkg';
     try {
         const res = await fetch(formspreeUrl, {
             method: 'POST',
