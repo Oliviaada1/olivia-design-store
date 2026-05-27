@@ -225,7 +225,7 @@ document.getElementById('order-email').addEventListener('click', async function(
     const cards = getAllCardsData();
     let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n اللون: ${c.color}`).join('\n\n');
     const message = `طلب جديد (كروت تحفيزية):\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${fullDetails}`;
-    const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    const formspreeUrl = 'https://formspree.io/f/mzdwkqkg';
     try {
         const res = await fetch(formspreeUrl, {
             method: 'POST',
