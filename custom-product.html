@@ -127,25 +127,30 @@
         });
 
         document.getElementById('send-email').addEventListener('click', async function() {
-            const type = document.getElementById('product-type').value;
-            const desc = document.getElementById('description').value;
-            const img = document.getElementById('image-url').value;
-            const name = document.getElementById('fullname').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            if (!name || !phone || !desc) { alert('يرجى ملء جميع الحقول المطلوبة'); return; }
-            const address = document.getElementById('address').value;
-            const message = `طلب منتج:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nالنوع: ${type}\nالوصف: ${desc}\nصورة: ${img}`;
-            const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
-            try {
-                const res = await fetch(formspreeUrl, {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({ name, phone, message, _subject: `طلب منتج: ${type}` })
-                });
-                if(res.ok) alert('تم إرسال الطلب! سنتواصل معك قريباً.');
-                else alert('حدث خطأ، حاول مرة أخرى أو عبر واتساب');
-            } catch(e) { alert('خطأ في الإرسال'); }
+    const type = document.getElementById('product-type').value;
+    const desc = document.getElementById('description').value;
+    const img = document.getElementById('image-url').value;
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone || !desc) { alert('يرجى ملء جميع الحقول المطلوبة'); return; }
+    const address = document.getElementById('address').value;
+    const message = `طلب منتج جديد:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nالنوع: ${type}\nالوصف: ${desc}\nصورة مرجعية: ${img}`;
+    const formspreeUrl = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+    try {
+        const res = await fetch(formspreeUrl, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ name, phone, message, _subject: `طلب منتج: ${type}` })
         });
+        if(res.ok) alert('تم إرسال الطلب! سنتواصل معك قريباً.');
+        else alert('حدث خطأ، حاول مرة أخرى.');
+    } catch(e) { alert('خطأ في الإرسال'); }
+});
+
+document.getElementById('send-ig').addEventListener('click', function() {
+    window.open('https://www.instagram.com/_olivia.design_/', '_blank');
+    alert('بعد فتح المحادثة، اكتب لنا تفاصيل طلبك وسنرد عليك خلال ساعات.');
+});
     </script>
 </body>
 </html>
