@@ -2,83 +2,180 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>تخصيص كروت التحفيز - Olivia Design</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
+        /* تنسيق عام للصفحة */
+        body {
+            background-color: #FFF0F5;
+        }
+        /* قسم التحكم العلوي */
+        .controls-header {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #FCE4EC;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+        }
+        .quantity-box label {
+            font-weight: bold;
+            color: #AD1457;
+            font-size: 18px;
+        }
+        select {
+            padding: 10px 16px;
+            border-radius: 40px;
+            border: 1px solid #F8BBD0;
+            font-size: 16px;
+            background: white;
+            font-family: 'Cairo', sans-serif;
+        }
+        .price-badge {
+            background: #FFD700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #880E4F;
+        }
+        /* شبكة البطاقات */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
             margin: 2rem 0;
         }
         .card-editor {
-            background: #FFF0F5;
-            border-radius: 20px;
-            padding: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border: 1px solid #F8BBD0;
+            background: white;
+            border-radius: 24px;
+            padding: 1.2rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+            border: 1px solid #FCE4EC;
+            transition: 0.2s;
+        }
+        .card-editor:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
         }
         .card-editor label {
             font-weight: bold;
             color: #AD1457;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            font-size: 16px;
         }
         .card-editor textarea {
             width: 100%;
             height: 90px;
-            border-radius: 12px;
-            border: 1px solid #F8BBD0;
-            padding: 8px;
-            font-family: inherit;
+            border-radius: 20px;
+            border: 1.5px solid #F8BBD0;
+            padding: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            resize: vertical;
         }
         .card-editor input[type="color"] {
             width: 100%;
-            height: 40px;
-            border-radius: 12px;
+            height: 45px;
+            border-radius: 20px;
             border: 1px solid #F8BBD0;
             margin-top: 5px;
+            cursor: pointer;
         }
+        /* قسم معلومات الطلب */
         .order-summary {
-            background: #FCE4EC;
-            padding: 1.5rem;
-            border-radius: 24px;
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
             margin: 2rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .order-summary h3 {
+            color: #AD1457;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .form-row {
+            margin-bottom: 1.2rem;
+        }
+        .form-row label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+            color: #AD1457;
+            font-size: 17px;
+        }
+        .form-row input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 30px;
+            border: 1.5px solid #F8BBD0;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
         }
         .btn-order {
             background: #E91E63;
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 40px;
+            padding: 14px 20px;
+            border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
-            font-size: 1rem;
+            margin-bottom: 12px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.2s;
         }
         .btn-wa {
             background: #25D366;
         }
-        .quantity-selector {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            margin: 1rem 0;
-            flex-wrap: wrap;
+        .btn-ig {
+            background: #E1306C;
         }
-        .quantity-selector label {
-            font-weight: bold;
+        .btn-order:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
         }
-        select {
-            padding: 8px 16px;
-            border-radius: 40px;
-            border: 1px solid #F8BBD0;
+        .note {
+            font-size: 14px;
+            color: #AD1457;
+            text-align: center;
+            margin-top: 15px;
+        }
+        @media (max-width: 700px) {
+            .controls-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -86,40 +183,66 @@
     <header>
         <div class="container header-flex">
             <div class="logo"><h1>Olivia <span>Design</span></h1><p>طباعة وتصميم بإحساس</p></div>
-            <nav><ul><li><a href="index.html">الرئيسية</a></li><li><a href="products.html">الخدمات</a></li><li><a href="customize-cards.html" class="active">كروت مخصصة</a></li><li><a href="custom-product.html">طلب منتج آخر</a></li></ul></nav>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">الخدمات</a></li>
+                    <li><a href="customize-cards.html" class="active">كروت مخصصة</a></li>
+                    <li><a href="custom-product.html">طلب منتج آخر</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
     <main class="container">
-        <h2>✨ تصميم كروت تحفيزية (طباعة وجهين)</h2>
-        <p>اختر عدد البطاقات (كل 12 كارت = 6 د.ل)، ثم اكتب نصاً مختلفاً لكل بطاقة واختر لون خلفية لكل واحدة. يمكنك ترك النص فارغاً وسنستخدم عبارات افتراضية.</p>
-        
-        <div class="quantity-selector">
-            <label>📦 عدد البطاقات (مضاعفات 12):</label>
-            <select id="card-count">
-                <option value="12">12 كارت - 6 د.ل</option>
-                <option value="24">24 كارت - 12 د.ل</option>
-                <option value="36">36 كارت - 18 د.ل</option>
-                <option value="48">48 كارت - 24 د.ل</option>
-                <option value="60">60 كارت - 30 د.ل</option>
-            </select>
-            <span id="price-display" style="background:#FFD700; padding:5px 12px; border-radius:40px;">السعر: 6 د.ل</span>
+        <h2 style="text-align:center;">🎨 صمم كروت التحفيز الخاصة بك</h2>
+        <p style="text-align:center; margin-bottom: 2rem;">اختر عدد البطاقات (كل 12 كارت = 6 د.ل)، ثم اكتب نصاً مختلفاً لكل بطاقة واختر لون الخلفية لكل واحدة. يمكنك ترك النص فارغاً وسنضع عبارات افتراضية.</p>
+
+        <!-- شريط الاختيارات العلوي -->
+        <div class="controls-header">
+            <div class="quantity-box">
+                <label>📦 عدد البطاقات (مضاعفات 12):</label>
+                <select id="card-count">
+                    <option value="12">12 كارت - 6 د.ل</option>
+                    <option value="24">24 كارت - 12 د.ل</option>
+                    <option value="36">36 كارت - 18 د.ل</option>
+                    <option value="48">48 كارت - 24 د.ل</option>
+                    <option value="60">60 كارت - 30 د.ل</option>
+                </select>
+            </div>
+            <div class="price-badge" id="price-display">السعر: 6 د.ل</div>
         </div>
 
+        <!-- الحاويات التي سيتم تعبئتها ديناميكياً -->
         <div id="cards-container" class="cards-grid"></div>
 
+        <!-- قسم معلومات الطلب والإرسال -->
         <div class="order-summary">
             <h3>📋 معلومات الطلب</h3>
-            <div><label>الاسم الكامل *</label><input type="text" id="fullname" style="width:100%; margin-bottom:10px;"></div>
-            <div><label>رقم الواتساب *</label><input type="tel" id="phone" style="width:100%; margin-bottom:10px;"></div>
-            <div><label>عنوان التوصيل (اختياري)</label><input type="text" id="address" style="width:100%; margin-bottom:10px;"></div>
-            <!-- داخل قسم order-summary، استبدل الأزرار بما يلي: -->
-<button id="order-email" class="btn-order">✉️ إرسال الطلب بالإيميل</button>
-<button id="order-ig" class="btn-order" style="background:#E1306C;">📷 راسلنا على الإنستغرام</button>
+            <div class="form-row">
+                <label>الاسم الكامل *</label>
+                <input type="text" id="fullname" placeholder="أدخل اسمك الثلاثي">
+            </div>
+            <div class="form-row">
+                <label>رقم الهاتف (للتواصل) *</label>
+                <input type="tel" id="phone" placeholder="مثال: 0912345678">
+            </div>
+            <div class="form-row">
+                <label>عنوان التوصيل (اختياري)</label>
+                <input type="text" id="address" placeholder="المدينة - الحي - الشارع">
+            </div>
+            <button id="generate-pdf" class="btn-order">📄 إنشاء PDF (كل بطاقة في صفحة)</button>
+            <button id="order-email" class="btn-order">✉️ إرسال الطلب بالإيميل</button>
+            <button id="order-ig" class="btn-order btn-ig">📷 راسلنا على الإنستغرام</button>
+            <div class="note">⭐ بعد إنشاء PDF، يمكنك إرساله لنا عبر الإيميل أو الإنستغرام. سنقوم بطباعته وتسليمه خلال 3 أيام عمل.</div>
         </div>
     </main>
 
-    <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
+    <footer>
+        <div class="container">
+            <p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a> | <i class="fas fa-envelope"></i> olivia.design@example.com</p>
+        </div>
+    </footer>
 
     <script>
         let currentCount = 12;
@@ -127,21 +250,24 @@
         const countSelect = document.getElementById('card-count');
         const priceSpan = document.getElementById('price-display');
 
+        // تحديث السعر المعروض
         function updatePrice() {
             let count = parseInt(countSelect.value);
             let price = (count / 12) * 6;
             priceSpan.innerText = `السعر: ${price} د.ل (${count} كارت)`;
         }
 
+        // إنشاء حقول البطاقات حسب العدد
         function generateCardEditors(count) {
             container.innerHTML = '';
             for (let i = 1; i <= count; i++) {
                 const editor = document.createElement('div');
                 editor.className = 'card-editor';
                 editor.innerHTML = `
-                    <label>📝 البطاقة رقم ${i} - النص</label>
-                    <textarea id="text-${i}" rows="3">عبارة تحفيزية ${i}</textarea>
-                    
+                    <label>📝 البطاقة رقم ${i}</label>
+                    <textarea id="text-${i}" rows="3" placeholder="اكتب العبارة التحفيزية هنا...">عبارة تحفيزية ${i}</textarea>
+                    <label>🎨 لون الخلفية</label>
+                    <input type="color" id="color-${i}" value="#FFF0F5">
                 `;
                 container.appendChild(editor);
             }
@@ -152,22 +278,24 @@
             updatePrice();
             generateCardEditors(currentCount);
         });
+
+        // تهيئة أولية
         generateCardEditors(12);
         updatePrice();
 
+        // جمع بيانات جميع البطاقات
         function getAllCardsData() {
             let cards = [];
             for (let i = 1; i <= currentCount; i++) {
                 let text = document.getElementById(`text-${i}`).value.trim();
-                if (!text) text = `✨ أنتِ قوية ✨`;
+                if (!text) text = `✨ أنتِ قوية ✨ (رقم ${i})`;
                 let color = document.getElementById(`color-${i}`).value;
                 cards.push({ text, color });
             }
             return cards;
         }
 
-        
-
+        // تحويل اللون hex إلى rgb
         function hexToRgb(hex) {
             let r = parseInt(hex.slice(1,3), 16);
             let g = parseInt(hex.slice(3,5), 16);
@@ -175,34 +303,79 @@
             return {r,g,b};
         }
 
-        
-
- // إيميل
-document.getElementById('order-email').addEventListener('click', async function() {
-    const name = document.getElementById('fullname').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    if (!name || !phone) { alert('الاسم ورقم الهاتف مطلوبان'); return; }
-    const address = document.getElementById('address').value;
-    const cards = getAllCardsData();
-    let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n `).join('\n\n');
-    const message = `طلب جديد (كروت تحفيزية):\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${fullDetails}`;
-    const formspreeUrl = 'https://formspree.io/f/mzdwkqkg';
-    try {
-        const res = await fetch(formspreeUrl, {
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({ name, phone, message, _subject: 'طلب كروت تحفيزية' })
+        // إنشاء PDF
+        document.getElementById('generate-pdf').addEventListener('click', async function() {
+            const btn = this;
+            btn.innerText = '⏳ جاري إنشاء PDF...';
+            btn.disabled = true;
+            try {
+                const cards = getAllCardsData();
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                
+                for (let idx = 0; idx < cards.length; idx++) {
+                    if (idx !== 0) pdf.addPage();
+                    const card = cards[idx];
+                    const rgb = hexToRgb(card.color);
+                    pdf.setFillColor(rgb.r, rgb.g, rgb.b);
+                    pdf.rect(10, 10, pageWidth - 20, pageHeight - 20, 'F');
+                    pdf.setDrawColor(218, 165, 32);
+                    pdf.setLineWidth(1.5);
+                    pdf.rect(15, 15, pageWidth - 30, pageHeight - 30, 'D');
+                    pdf.setFontSize(18);
+                    pdf.setTextColor(136, 14, 79);
+                    const lines = pdf.splitTextToSize(card.text, pageWidth - 50);
+                    const yStart = pageHeight / 2 - (lines.length * 10);
+                    pdf.text(lines, pageWidth/2, yStart, { align: 'center' });
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(180, 130, 140);
+                    pdf.text("by happy", pageWidth - 20, pageHeight - 15, { align: 'right' });
+                }
+                pdf.save('olivia_cards.pdf');
+                alert('✅ تم حفظ PDF بنجاح! يمكنك الآن إرساله لنا عبر الإيميل أو الإنستغرام.');
+            } catch(e) {
+                alert('❌ خطأ: ' + e.message);
+            } finally {
+                btn.innerText = '📄 إنشاء PDF (كل بطاقة في صفحة)';
+                btn.disabled = false;
+            }
         });
-        if(res.ok) alert('تم إرسال الطلب بنجاح! سنتواصل معك عبر البريد أو الإنستغرام.');
-        else alert('حدث خطأ، حاول مرة أخرى أو راسلنا على الإنستغرام مباشرة.');
-    } catch(e) { alert('خطأ في الإرسال: '+e.message); }
-});
 
-// زر الإنستغرام
-document.getElementById('order-ig').addEventListener('click', function() {
-    window.open('https://www.instagram.com/_olivia.design_/', '_blank');
-    
-});
+        // إرسال عبر الإيميل (Formspree)
+        document.getElementById('order-email').addEventListener('click', async function() {
+            const name = document.getElementById('fullname').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!name || !phone) {
+                alert('❌ الرجاء إدخال الاسم الكامل ورقم الهاتف');
+                return;
+            }
+            const address = document.getElementById('address').value.trim();
+            const cards = getAllCardsData();
+            let details = cards.map((c,i)=>`${i+1}: ${c.text.substring(0,60)} (لون: ${c.color})`).join('\n');
+            const message = `طلب كروت تحفيزية جديد:\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address || 'غير مدخل'}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${details}`;
+            const FORMSPREE_URL = 'https://formspree.io/f/mzdwkqkg'; // استبدلي برابطك
+            try {
+                const res = await fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ name, phone, message, _subject: 'طلب كروت تحفيزية' })
+                });
+                if(res.ok) alert('✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.');
+                else alert('⚠️ حدث خطأ، يرجى المحاولة مرة أخرى أو مراسلتنا على الإنستغرام.');
+            } catch(e) {
+                alert('⚠️ فشل الاتصال. تأكدي من اتصالك بالإنترنت.');
+            }
+        });
+
+        // زر الإنستغرام
+        document.getElementById('order-ig').addEventListener('click', function() {
+            window.open('https://www.instagram.com/_olivia.design_/', '_blank');
+            setTimeout(() => {
+                alert('📷 تم فتح صفحة الإنستغرام. أرسلي لنا ملف PDF وطلبك هناك وسنرد عليك بسرعة.');
+            }, 500);
+        });
     </script>
 </body>
 </html>
