@@ -141,8 +141,7 @@
                 editor.innerHTML = `
                     <label>📝 البطاقة رقم ${i} - النص</label>
                     <textarea id="text-${i}" rows="3">عبارة تحفيزية ${i}</textarea>
-                    <label>🎨 لون الخلفية</label>
-                    <input type="color" id="color-${i}" value="#FFF0F5">
+                    
                 `;
                 container.appendChild(editor);
             }
@@ -185,7 +184,7 @@ document.getElementById('order-email').addEventListener('click', async function(
     if (!name || !phone) { alert('الاسم ورقم الهاتف مطلوبان'); return; }
     const address = document.getElementById('address').value;
     const cards = getAllCardsData();
-    let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n اللون: ${c.color}`).join('\n\n');
+    let fullDetails = cards.map((c,i)=>`${i+1}- النص: ${c.text}\n `).join('\n\n');
     const message = `طلب جديد (كروت تحفيزية):\nالاسم: ${name}\nالهاتف: ${phone}\nالعنوان: ${address}\nعدد البطاقات: ${currentCount}\n\nالتفاصيل:\n${fullDetails}`;
     const formspreeUrl = 'https://formspree.io/f/mzdwkqkg';
     try {
