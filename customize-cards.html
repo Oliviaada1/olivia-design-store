@@ -288,8 +288,7 @@
             for (let i = 1; i <= currentCount; i++) {
                 let text = document.getElementById(`text-${i}`).value.trim();
                 if (!text) text = `✨ أنتِ قوية ✨ (رقم ${i})`;
-                let color = document.getElementById(`color-${i}`).value;
-                cards.push({ text, color });
+                cards.push({ text });
             }
             return cards;
         }
