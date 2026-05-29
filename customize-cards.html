@@ -266,8 +266,7 @@
                 editor.innerHTML = `
                     <label>📝 البطاقة رقم ${i}</label>
                     <textarea id="text-${i}" rows="3" placeholder="اكتب العبارة التحفيزية هنا...">عبارة تحفيزية ${i}</textarea>
-                    <label>🎨 لون الخلفية</label>
-                    <input type="color" id="color-${i}" value="#FFF0F5">
+                  
                 `;
                 container.appendChild(editor);
             }
@@ -299,44 +298,7 @@
         
 
         // إنشاء PDF
-        document.getElementById('generate-pdf').addEventListener('click', async function() {
-            const btn = this;
-            btn.innerText = '⏳ جاري إنشاء PDF...';
-            btn.disabled = true;
-            try {
-                const cards = getAllCardsData();
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF('p', 'mm', 'a4');
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                
-                for (let idx = 0; idx < cards.length; idx++) {
-                    if (idx !== 0) pdf.addPage();
-                    const card = cards[idx];
-                    const rgb = hexToRgb(card.color);
-                    pdf.setFillColor(rgb.r, rgb.g, rgb.b);
-                    pdf.rect(10, 10, pageWidth - 20, pageHeight - 20, 'F');
-                    pdf.setDrawColor(218, 165, 32);
-                    pdf.setLineWidth(1.5);
-                    pdf.rect(15, 15, pageWidth - 30, pageHeight - 30, 'D');
-                    pdf.setFontSize(18);
-                    pdf.setTextColor(136, 14, 79);
-                    const lines = pdf.splitTextToSize(card.text, pageWidth - 50);
-                    const yStart = pageHeight / 2 - (lines.length * 10);
-                    pdf.text(lines, pageWidth/2, yStart, { align: 'center' });
-                    pdf.setFontSize(8);
-                    pdf.setTextColor(180, 130, 140);
-                    pdf.text("by happy", pageWidth - 20, pageHeight - 15, { align: 'right' });
-                }
-                pdf.save('olivia_cards.pdf');
-                alert('✅ تم حفظ PDF بنجاح! يمكنك الآن إرساله لنا عبر الإيميل أو الإنستغرام.');
-            } catch(e) {
-                alert('❌ خطأ: ' + e.message);
-            } finally {
-                btn.innerText = '📄 إنشاء PDF (كل بطاقة في صفحة)';
-                btn.disabled = false;
-            }
-        });
+        
 
         // إرسال عبر الإيميل (Formspree)
         document.getElementById('order-email').addEventListener('click', async function() {
