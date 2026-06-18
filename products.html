@@ -3,70 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>الخدمات والمنتجات - Olivia Design</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=5">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* تنسيقات إضافية خاصة بالمنتجات */
+        .upgrade-option {
+            background: #FFF3E0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 15px 0;
+            font-size: 15px;
+            border-right: 4px solid #FF9800;
+        }
+        .upgrade-option i {
+            color: #E65100;
+        }
+        .bundle-highlight {
+            background: #FCE4EC;
+            border-radius: 24px;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #F8BBD0;
+        }
+        .bundle-highlight ul {
+            list-style: none;
+            padding: 0;
+        }
+        .bundle-highlight ul li {
+            padding: 6px 0;
+            border-bottom: 1px dashed #F8BBD0;
+        }
+        .bundle-highlight ul li:last-child {
+            border-bottom: none;
+        }
+        .price-badge {
+            background: #FFD700;
+            color: #880E4F;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .note-upgrade {
+            background: #FFF8E1;
+            padding: 15px;
+            border-radius: 24px;
+            margin-top: 2rem;
+            border: 1px solid #FFE0B2;
+            font-size: 15px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container header-flex">
             <div class="logo"><h1>Olivia <span>Design</span></h1><p>طباعة وتصميم بإحساس</p></div>
-            <nav><ul><li><a href="index.html">الرئيسية</a></li><li><a href="products.html" class="active" >الخدمات</a></li><li><a href="customize-cards.html" >كروت مخصصة</a></li><li><a href="custom-product.html">طلب منتج آخر</a></li></ul></nav>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html" class="active">الخدمات</a></li>
+                    <li><a href="customize-cards.html">كروت مخصصة</a></li>
+                    <li><a href="custom-product.html">طلب منتج آخر</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
     <main class="container">
         <h2 class="page-title">📋 جميع خدماتنا ومنتجاتنا</h2>
         
+        <!-- قسم المطبوعات والمنتجات الجاهزة -->
         <div class="services-section">
-            <h3>🖨️ خدمات الطباعة والمنتجات</h3>
+            <h3>🖨️ المطبوعات والمنتجات الجاهزة</h3>
             <div id="products-list" class="price-list"></div>
         </div>
 
+        <!-- قسم خدمات السوشيال ميديا والدعوات الرقمية -->
         <div class="services-section">
-            <h3>📱 خدمات السوشيال ميديا</h3>
+            <h3>📱 خدمات السوشيال ميديا والدعوات الرقمية</h3>
             <div id="social-list" class="price-list"></div>
         </div>
 
+        <!-- قسم الباقات الشاملة -->
         <div class="services-section">
-            <h3>🎁 باقات شاملة (أسعار خاصة)</h3>
+            <h3>🎁 الباقات الشاملة (أفضل قيمة توفيرية)</h3>
             <div id="bundles-list" class="price-list"></div>
+            <div class="bundle-highlight">
+                <ul>
+                    <li><strong>🎓 باقة تخرج شاملة (85 د.ل):</strong> تشمل لوحة تخرج جاهزة لتعديل الاسم + زينة حائط يدوية مجمعة بالشرائط + تصميم ثيم ديجيتال مخصص.</li>
+                    <li><strong>🎂 باقة عرس شاملة (115 د.ل):</strong> تشمل تصميم ثيم عرس ديجيتال + 10 طباعة وجهين + فلتر سناب شات عادي + 3 قطع إكسسوارات تصوير مجانية (جاهزة مسبقاً كهدية).</li>
+                    <li><strong>🍼 باقة مولود شاملة (75 د.ل):</strong> تشمل تصميم ثيم مولود ديجيتال + 5 طباعة استيكر + فلتر سناب شات عادي.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- قسم خيارات الترقية -->
+        <div class="upgrade-option">
+            <i class="fas fa-star"></i> <strong>خيارات ترقية الورق للمطبوعات (الكروت، اللوحات، البطاقات):</strong>
+            <ul style="margin: 8px 0 0 20px; list-style: circle;">
+                <li>ورق مزخرف (فاخر) : <strong>+ 3 د.ل</strong> للقطعة الواحدة.</li>
+                <li>ورق قطني فاخر (نقش مميز) : <strong>+ 5 د.ل</strong> للقطعة الواحدة.</li>
+            </ul>
+            <small style="display:block; margin-top:5px;">يمكن إضافة هذه الترقيات لأي منتج مطبوع (كروت، لوحات، استيكرات، إلخ).</small>
         </div>
 
         <div class="note">
-            <p><i class="fas fa-info-circle"></i> ملاحظة: الأسعار بالدينار الليبي، قابلة للتغيير حسب التفاصيل. للطلب المخصص تواصل معنا عبر الإنستغرام  .</p>
+            <p><i class="fas fa-info-circle"></i> ملاحظة: الأسعار بالدينار الليبي، قابلة للتغيير حسب التفاصيل. للطلب المخصص تواصل معنا عبر الإنستغرام أو الإيميل.</p>
         </div>
     </main>
 
-    <footer><div class="container"><p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a></p></div></footer>
+    <footer>
+        <div class="container">
+            <p>© 2026 Olivia Design - <i class="fab fa-instagram"></i> <a href="https://www.instagram.com/_olivia.design_" target="_blank">@_olivia.design_</a> | <i class="fas fa-envelope"></i> olivia.design@example.com</p>
+        </div>
+    </footer>
 
     <script>
-        // قائمة المنتجات - يمكنك إضافة أو تعديل أي منتج بسهولة هنا
+        // قائمة المنتجات الجديدة
         const products = [
+            { name: "لوحة تخرج/مناسبات (تصميم حصري جديد من الصفر + طباعة وقص)", price: "65 د.ل" },
+            { name: "لوحة تخرج (تعديل ألوان وتفاصيل على تصميم جاهز + طباعة وقص)", price: "35 د.ل" },
+            { name: "لوحة تخرج (تصميم جاهز - تعديل اسم وسنة فقط + طباعة وقص)", price: "25 د.ل" },
+            { name: "باكج كروت المناسبات الفاخرة (حواف ممزقة يدوياً وتنسيق راقي - 10 كروت)", price: "30 د.ل" },
+            { name: "زينة حائط واستقبال يدوية متكاملة (مثل زينة 'سند')", price: "45 د.ل" },
+            { name: "لوحة عروس كاملة وجاهزة", price: "85 د.ل" },
+            { name: "لوحة عريس كاملة وجاهزة", price: "55 د.ل" },
+            { name: "لوحة استقبال (مطبوعة وجاهزة)", price: "35 د.ل" },
+            { name: "كروت التحفيز أو الطاولة الجاهزة (باكج 12 كارت)", price: "8 د.ل" },
+            { name: "فريم أبيض (15×20 سم)", price: "15 د.ل" },
             { name: "استيكر (مقاسات متنوعة)", price: "5 د.ل" },
-            { name: "طباعة وجهين (لكل وجه)", price: "2 د.ل" },
-            { name: "فريم أبيض 20×15 سم", price: "14 د.ل" },
-            { name: "كروت التحفيز (12 كارت)", price: "6 د.ل" },
-            { name: "تعليف حراري", price: "1.50 د.ل" },
-            { name: "إكسسوارات تصوير", price: "2 د.ل" }
+            { name: "طباعة وجهين (لكل وجه)", price: "2.50 د.ل" },
+            { name: "تغليف حراري", price: "2 د.ل" }
         ];
 
         const social = [
-            { name: "فيلتر جاهز (سناب/انستا)", price: "10 د.ل" },
-            { name: "دعوة 2D ثابتة", price: "20 د.ل" },
-            { name: "دعوة فيديو قصير", price: "40 د.ل" },
-            { name: "دعوة 3D احترافية", price: "100 د.ل" },
-            { name: "تصميم متوسط (بوست)", price: "15 د.ل" },
-            { name: "تصميم قوي (متكامل)", price: "20 د.ل" },
-            { name: "لوحة استقبال", price: "30 د.ل" },
-            { name: "لوحة عروس", price: "80 د.ل" },
-            { name: "لوحة عريس", price: "50 د.ل" }
+            { name: "دعوة إلكترونية تفاعلية (رابط موقع ويب كامل بمميزاته)", price: "55 د.ل" },
+            { name: "دعوة فيديو قصير", price: "45 د.ل" },
+            { name: "دعوة 2D ثابتة", price: "25 د.ل" },
+            { name: "دعوة 3D احترافية", price: "110 د.ل" },
+            { name: "فلتر سناب شات (رسم رقمي عريس وعروس معاً)", price: "55 د.ل" },
+            { name: "فلتر سناب شات (رسم رقمي لشخص واحد عروس أو عريس)", price: "35 د.ل" },
+            { name: "فلتر جاهز (دمج صور وخطوط بدون رسم)", price: "10 د.ل" },
+            { name: "تصميم ثيم مناسبة خاص وحصري (ملف ديجيتال فقط)", price: "45 د.ل" },
+            { name: "تصميم قوي ومتكامل لبراند أو هوية تجارية", price: "35 د.ل" },
+            { name: "تصميم متوسط (بوست أو ملصق بسيط لمنتج)", price: "25 د.ل" }
         ];
 
+        // الباقات الشاملة (تم عرضها تفصيلياً في الـ HTML أعلاه، لكن نضيفها أيضاً للقائمة كنوع من العرض)
         const bundles = [
-            { name: "🎂 باقة عرس (شاملة): تصميم ثيم عرس + 10 طباعة وجهين + فلتر سناب شات", price: "100 د.ل" },
-            { name: "🍼 باقة مولود (شاملة): تصميم ثيم مولود + 5 طباعة استيكر + فلتر سناب شات", price: "65 د.ل" }
+            { name: "🎓 باقة تخرج شاملة", price: "85 د.ل" },
+            { name: "🎂 باقة عرس شاملة", price: "115 د.ل" },
+            { name: "🍼 باقة مولود شاملة", price: "75 د.ل" }
         ];
 
         function renderList(containerId, items) {
